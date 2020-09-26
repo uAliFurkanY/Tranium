@@ -39,7 +39,7 @@ function onMessage(bot, username, message, translate, jsonMsg) {
 	try {
 		process.env.COMMANDS.get(command).execute();
 	} catch (e) {
-		error(e);
+		console.error(e);
 		bot.chat("couldn't execute command: `" + e.message + "`!");
 	}
 
