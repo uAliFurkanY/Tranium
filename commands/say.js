@@ -12,6 +12,6 @@ module.exports = {
 	 */
 	execute(bot, message, args, selfCmd) {
 		if (message.author.authLevel() === 3) bot.chat(args.join(" "));
-		else bot.chat("You don't have enough permissions. (A3 required)");
+		else bot.chat("You don't have the required permissions. (A3 required)");
 	},
 };

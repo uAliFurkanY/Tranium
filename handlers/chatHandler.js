@@ -1,7 +1,7 @@
 const db = require("../lib/db");
 const Map = require("collections/map");
 global.data = db.data();
-const userData = db.userData({
+global.userData = db.userData({
 	authLevel: 0,
 	isLinked: false,
 	blacklisted: false,
