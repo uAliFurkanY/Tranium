@@ -1,0 +1,30 @@
+{
+	"name": "tranium",
+	"version": "0.1.0",
+	"description": "Minecraft bot with custom command support.",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js",
+		"configure": "node setup.js",
+		"test": "echo notests4u && exit"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/uAliFurkanY/Tranium.git"
+	},
+	"author": "Ali Furkan YILDIZ",
+	"license": "GPL-3.0",
+	"bugs": {
+		"url": "https://github.com/uAliFurkanY/Tranium/issues"
+	},
+	"homepage": "https://github.com/uAliFurkanY/Tranium#readme",
+	"dependencies": {
+		"colors": "^1.4.0",
+		"fd-wrapper": "^0.1.0",
+		"inquirer": "^7.3.3",
+		"mineflayer": "^2.28.1",
+		"nkv.db": "^0.1.1",
+		"prettier": "^2.1.2",
+		"shlex": "^2.0.2"
+	}
+}
