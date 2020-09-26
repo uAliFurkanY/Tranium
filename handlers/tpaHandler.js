@@ -1,3 +1,4 @@
+const mineflayer = require("mineflayer");
 /**
  * @param {mineflayer.Bot} bot
  * @param {string} username
@@ -13,13 +14,16 @@ function onTpa(bot, username, message, selfCmd = false) {
 		.split(" ");
 	let user = bot.players[msg[0]];
 	if (!user) return;
+	console.log("[TPA] " + user.username);
 	let usr = userData(user.uuid);
 	if (data.mode > 0 && !usr.authLevel > 0) {
 		bot.chat(
-			"/msg " + msg[0] + " You are not allowed to teleport to the bot."
+			"/msg " +
+				user.username +
+				" You are not allowed to teleport to the bot."
 		);
 	} else {
-		bot.chat("/tpy " + msg[0]);
+		bot.chat("/tpy " + user.username);
 	}
 }
 
