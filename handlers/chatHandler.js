@@ -1,15 +1,15 @@
 const db = require("../lib/db");
 const Map = require("collections/map");
-global.data = db.data();
-global.userData = db.userData({
+const data = db.data();
+global.data = data;
+const userData = db.userData({
 	authLevel: 0,
 	isLinked: false,
 	blacklisted: false,
 });
+global.userData = userData;
 const mineflayer = require("mineflayer");
-const shlex = require("shlex");
 const fs = require("fs");
-const PREFIX = "T.";
 const commandFiles = fs
 	.readdirSync("./commands")
 	.filter((file) => file.endsWith(".js"));
@@ -19,7 +19,8 @@ for (const file of commandFiles) {
 	commands.set(command.name, command);
 }
 
-if (!data.prefix) data.prefix = PREFIX;
+if (!data.prefix) data.prefix = "T.";
+if (!data.mode) data.mode = 0;
 
 /**
  * @param {mineflayer.Bot} bot
@@ -29,10 +30,13 @@ if (!data.prefix) data.prefix = PREFIX;
  * @param {Object} jsonMsg `mineflayer` actually breaks this by setting it to string. So I set it to object.
  */
 function onMessage(bot, username, message, selfCmd = false) {
-	if (!username) return;
+	if (
+		!username ||
+		!username.match(/^[0-9a-zA-Z_]{3,16}$/) ||
+		!bot.players[username]
+	)
+		return;
 	//if (username === bot.username) return;
-	if (!username.match(/^[0-9a-zA-Z_]{3,16}$/)) return;
-	if (!bot.players[username]) return;
 	if (
 		!(
 			(selfCmd ? true : message.startsWith(data.prefix)) ||
@@ -41,12 +45,13 @@ function onMessage(bot, username, message, selfCmd = false) {
 	)
 		return;
 	const user = bot.players[username];
+	if (!user) return;
 
 	const usr = userData(user.uuid);
 	if (usr.blacklisted) return;
 
-	let args = shlex.split(
-		selfCmd ? message : message.slice(data.prefix.length)
+	let args = (selfCmd ? message : message.slice(data.prefix.length)).split(
+		" "
 	);
 	let command = args.shift();
 
@@ -59,8 +64,12 @@ function onMessage(bot, username, message, selfCmd = false) {
 	try {
 		commands.get(command).execute(bot, msg, args, selfCmd);
 	} catch (e) {
-		console.error(e);
-		bot.chat("couldn't execute command: `" + e.message + "`!");
+		if (e === "ERR_USAGE") {
+			bot.chat("Usage: " + commands.get(command).usage);
+		} else {
+			console.error(e);
+			bot.chat("couldn't execute command: `" + e.message + "`!");
+		}
 	}
 
 	console.log(`<${username}> ${message}`);

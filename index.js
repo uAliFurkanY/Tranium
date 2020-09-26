@@ -1,5 +1,6 @@
 const errorHandler = require("./handlers/errorHandler");
 const chatHandler = require("./handlers/chatHandler");
+const tpaHandler = require("./handlers/tpaHandler");
 const { Message, User } = require("./lib/classes");
 global.Message = Message;
 global.User = User;
@@ -28,7 +29,13 @@ async function main() {
 		);
 		bot.once("spawn", () => {
 			spawned = true;
+			bot.chatAddPattern(
+				/^[0-9a-zA-Z_]{3,16} wants to teleport/,
+				"tpa",
+				"Teleport"
+			);
 			bot.chatAddPattern(/.*/, "chat", "Any message");
+			bot.on("tpa", (u, m, t, cm) => tpaHandler);
 			bot.on("chat", (u, m, t, cm) => chatHandler(bot, u, m, t, cm));
 		}).on("end", () => {
 			spawned = false;

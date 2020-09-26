@@ -1,9 +1,9 @@
 const mineflayer = require("mineflayer");
 const { Message } = require("../lib/classes");
 module.exports = {
-	name: "help",
-	desc: "Help for the bot.",
-	usage: "help",
+	name: "uuid",
+	desc: "Get the UUID of a player",
+	usage: "uuid [player]",
 	/**
 	 * @param {mineflayer.Bot} bot
 	 * @param {Message} message
@@ -11,7 +11,8 @@ module.exports = {
 	 * @param {FormData} commands
 	 */
 	execute(bot, message, args, selfCmd) {
-		const commandList = Array.from(commands.entries()).map((x) => x[0]);
-		bot.chat("[ Tranium Bot ] `List of commands: " + commandList.join(" "));
+		let user = bot.players[args[0]];
+		if (!user) user = message.author.user;
+		bot.chat(user.uuid);
 	},
 };
