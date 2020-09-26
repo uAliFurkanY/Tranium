@@ -19,6 +19,7 @@
 	},
 	"homepage": "https://github.com/uAliFurkanY/Tranium#readme",
 	"dependencies": {
+		"collections": "^5.1.12",
 		"colors": "^1.4.0",
 		"fd-wrapper": "^0.1.0",
 		"inquirer": "^7.3.3",

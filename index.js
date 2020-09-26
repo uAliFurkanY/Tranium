@@ -1,6 +1,10 @@
 const errorHandler = require("./handlers/errorHandler");
 const chatHandler = require("./handlers/chatHandler");
-const net = require("net");
+const { Message, User } = require("./lib/classes");
+global.Message = Message;
+global.User = User;
+const readline = require("readline");
+const rl = readline.createInterface(process.stdin, process.stdout);
 
 async function main() {
 	const config = require("./config.json");
@@ -13,19 +17,7 @@ async function main() {
 	const HOST = server.shift();
 	const PORT = server.shift();
 
-	let bot;
-	const serv = net.createServer((sock) => {
-		sock.on("data", (msg) => {
-			msg = msg.toString().trim();
-			try {
-				console.log("SENT " + msg);
-				bot.chat(msg);
-			} catch (e) {
-				sock.write(e.message + "\n");
-			}
-		});
-	});
-	serv.listen(31337);
+	let bot, spawned;
 	(function createBot() {
 		bot = require("./bot")(
 			HOST,
@@ -35,12 +27,22 @@ async function main() {
 			config.password
 		);
 		bot.once("spawn", () => {
+			spawned = true;
 			bot.chatAddPattern(/.*/, "chat", "Any message");
 			bot.on("chat", (u, m, t, cm) => chatHandler(bot, u, m, t, cm));
 		}).on("end", () => {
+			spawned = false;
 			createBot();
 		});
 	})();
+
+	rl.on("line", (line) => {
+		if (spawned) {
+			chatHandler(bot, bot.username, line, true);
+		} else {
+			console.log("BOT NOT READY".bgYellow);
+		}
+	});
 
 	return "MAIN DONE".bgWhite.black;
 }
