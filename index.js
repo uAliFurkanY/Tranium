@@ -35,7 +35,7 @@ async function main() {
 				"Teleport"
 			);
 			bot.chatAddPattern(/.*/, "chat", "Any message");
-			bot.on("tpa", (u, m, t, cm) => tpaHandler);
+			bot.on("tpa", (u, m, t, cm) => tpaHandler(bot, u, m, t, cm));
 			bot.on("chat", (u, m, t, cm) => chatHandler(bot, u, m, t, cm));
 		}).on("end", () => {
 			spawned = false;

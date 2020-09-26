@@ -5,7 +5,7 @@
  * @param {string} translate
  * @param {Object} jsonMsg `mineflayer` actually breaks this by setting it to string. So I set it to object.
  */
-function onMessage(bot, username, message, selfCmd = false) {
+function onTpa(bot, username, message, selfCmd = false) {
 	if (!message.extra) return;
 	let msg = message.extra
 		.map((x) => x.text)
@@ -23,4 +23,4 @@ function onMessage(bot, username, message, selfCmd = false) {
 	}
 }
 
-module.exports = onMessage;
+module.exports = onTpa;
