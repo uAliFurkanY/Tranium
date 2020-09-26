@@ -2,6 +2,7 @@ const db = require("../lib/db");
 const data = db.data();
 const codes = db.data("codes");
 const userData = db.userData({ authLevel: 0, isLinked: false });
+const { Message, User } = require("../lib/classes");
 const mineflayer = require("mineflayer");
 const shlex = require("shlex");
 const fs = require("fs");

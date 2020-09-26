@@ -5,11 +5,10 @@ module.exports = {
 	desc: "Help for the bot.",
 	usage: "help",
 	/**
-	 *
 	 * @param {mineflayer.Bot} bot
-	 * @param {*} Message
-	 * @param {*} User
-	 * @param {*} args
+	 * @param {Message} Message
+	 * @param {User} User
+	 * @param {String[]} args
 	 */
 	execute(bot, Message, User, args) {},
 };
