@@ -29,7 +29,7 @@ function createBot(host, port, version, user, pass) {
 		})
 		.on("error", (err) => {
 			console.log("ERROR".bgRed);
-			console.log(err.message);
+			console.log(err);
 		})
 		.on("end", () => {
 			console.log("END".bgRed);

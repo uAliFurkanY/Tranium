@@ -2,6 +2,7 @@ const errorHandler = require("./handlers/errorHandler");
 const chatHandler = require("./handlers/chatHandler");
 const tpaHandler = require("./handlers/tpaHandler");
 const { Message, User } = require("./lib/classes");
+const { sleep } = require("sleepjs");
 global.Message = Message;
 global.User = User;
 const readline = require("readline");
@@ -19,7 +20,7 @@ async function main() {
 	const PORT = server.shift();
 
 	let bot, spawned;
-	(function createBot() {
+	await (async function createBot() {
 		bot = require("./bot")(
 			HOST,
 			PORT,
@@ -37,8 +38,9 @@ async function main() {
 			bot.chatAddPattern(/.*/, "chat", "Any message");
 			bot.on("tpa", (u, m, t, cm) => tpaHandler(bot, u, m, t, cm));
 			bot.on("chat", (u, m, t, cm) => chatHandler(bot, u, m, t, cm));
-		}).on("end", () => {
+		}).on("end", async () => {
 			spawned = false;
+			await sleep(5000);
 			createBot();
 		});
 	})();
