@@ -16,7 +16,8 @@ function onTpa(bot, username, message, selfCmd = false) {
 	if (!user) return;
 	console.log("[TPA] " + user.username);
 	let usr = userData(user.uuid);
-	if (data.mode > 0 && !usr.authLevel > 0) {
+
+	if ((data.mode > 0 && !usr.authLevel > 0) || usr.blacklisted) {
 		bot.chat(
 			"/msg " +
 				user.username +

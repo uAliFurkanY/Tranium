@@ -2,9 +2,9 @@ const mineflayer = require("mineflayer");
 const { Message } = require("../lib/classes");
 
 module.exports = {
-	name: "prefix",
-	desc: "Set/get the prefix.",
-	usage: "prefix [value]",
+	name: "kill",
+	desc: "Kill the bot.",
+	usage: "kill",
 	/**
 	 * @param {mineflayer.Bot} bot
 	 * @param {Message} message
@@ -12,9 +12,8 @@ module.exports = {
 	 * @param {FormData} commands
 	 */
 	execute(bot, message, args, selfCmd) {
-		if (message.author.authLevel() === 2 && args.length >= 1) {
-			data.prefix = args[0];
-			console.log("Changed the prefix to '" + args[0] + "'.");
-		} else bot.chat("The prefix is '" + data.prefix + "'.");
+		if (data.mode > 0 && !message.author.authLevel() > 0) {
+			bot.chat("You don't have the required permissions. (A1 required)");
+		} else bot.chat("/kill");
 	},
 };
