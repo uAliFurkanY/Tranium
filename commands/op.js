@@ -13,18 +13,20 @@ module.exports = {
 	 */
 	execute(bot, message, args, selfCmd) {
 		if (message.author.authLevel() === 3) {
-			if (args.length >= 2) {
+			if (args.length >= 1) {
 				let possibleUser = bot.players[args[0]];
 				if (possibleUser) {
 					let usr = userData(possibleUser.uuid);
-					usr.authLevel = parseInt(args[1]) || 3;
+					usr.authLevel =
+						parseInt(args[1]) === NaN ? 3 : parseInt(args[1]);
 				} else if (
 					args[0].match(
 						/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
 					)
 				) {
-					let usr = userData(args.shift());
-					usr.authLevel = parseInt(args[1]) || 3;
+					let usr = userData(args[0]);
+					usr.authLevel =
+						parseInt(args[1]) === NaN ? 3 : parseInt(args[1]);
 				} else {
 					return bot.chat("User not found: " + args[0] + ".");
 				}

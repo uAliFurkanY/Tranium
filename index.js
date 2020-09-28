@@ -5,6 +5,7 @@ const { Message, User } = require("./lib/classes");
 const { sleep } = require("sleepjs");
 global.Message = Message;
 global.User = User;
+global.sinceLastKill = Date.now();
 const readline = require("readline");
 const rl = readline.createInterface(process.stdin, process.stdout);
 
@@ -29,6 +30,7 @@ async function main() {
 			config.password
 		);
 		bot.once("spawn", () => {
+			global.sinceLastKill = Date.now();
 			spawned = true;
 			bot.chatAddPattern(
 				/^[0-9a-zA-Z_]{3,16} wants to teleport/,
