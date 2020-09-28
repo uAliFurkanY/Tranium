@@ -1,9 +1,9 @@
 const mineflayer = require("mineflayer");
 const { Message } = require("../lib/classes");
 module.exports = {
-	name: "say",
-	desc: "Make the bot say something. [A3]",
-	usage: "say <message>",
+	name: "github",
+	desc: "Get the GitHub repo URL.",
+	usage: "github",
 	/**
 	 * @param {mineflayer.Bot} bot
 	 * @param {Message} message
@@ -11,10 +11,6 @@ module.exports = {
 	 * @param {FormData} commands
 	 */
 	execute(bot, message, args, selfCmd) {
-		if (message.author.authLevel() === 3) {
-			if (args.length >= 1) bot.chat(args.join(" "));
-			else throw "ERR_USAGE";
-		} else
-			bot.chat("You don't have the required permissions. (A3 required)");
+		bot.chat("https://github.com/uAliFurkanY/Tranium");
 	},
 };

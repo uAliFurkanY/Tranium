@@ -5,7 +5,7 @@ const { userData } = require("../lib/db");
 module.exports = {
 	name: "blacklist",
 	desc: "Make the bot blacklist someone. [A2]",
-	usage: "help",
+	usage: "blacklist <username|uuid>",
 	/**
 	 * @param {mineflayer.Bot} bot
 	 * @param {Message} message
