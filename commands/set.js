@@ -17,6 +17,9 @@ module.exports = {
 				data[args.shift()] = JSON.parse(args.join(" "));
 			else throw "ERR_USAGE";
 		} else
-			bot.chat("You don't have the required permissions. (A3 required)");
+			bot.send(
+				"You don't have the required permissions. (A3 required)",
+				message.author.username
+			);
 	},
 };

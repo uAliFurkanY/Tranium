@@ -13,13 +13,19 @@ module.exports = {
 	 */
 	execute(bot, message, args, selfCmd) {
 		if (data.mode > 0 && !message.author.authLevel() > 0) {
-			bot.chat("You don't have the required permissions. (A1 required)");
+			bot.send(
+				"You don't have the required permissions. (A1 required)",
+				message.author.username
+			);
 		} else {
 			let coords = bot.player.entity.position
 				.toArray()
 				.map((x, idx) => ["X", "Y", "Z"][idx] + "=" + x.toFixed(2))
 				.join(" ");
-			bot.chat("My coordinates are " + coords + ".");
+			bot.send(
+				"My coordinates are " + coords + ".",
+				message.author.username
+			);
 		}
 	},
 };

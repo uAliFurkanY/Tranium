@@ -15,6 +15,10 @@ module.exports = {
 		if (message.author.authLevel() === 2 && args.length >= 1) {
 			data.prefix = args[0];
 			console.log("Changed the prefix to '" + args[0] + "'.");
-		} else bot.chat("The prefix is '" + data.prefix + "'.");
+		} else
+			bot.send(
+				"The prefix is '" + data.prefix + "'.",
+				message.author.username
+			);
 	},
 };

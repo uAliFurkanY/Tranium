@@ -15,13 +15,20 @@ module.exports = {
 		if (args[0]) {
 			if (commandList.includes(args[0])) {
 				let cmd = commands.get(args[0]);
-				bot.chat("> " + cmd.desc + " `Usage: " + cmd.usage);
+				bot.send(
+					"> " + cmd.desc + " `Usage: " + cmd.usage,
+					message.author.username
+				);
 			} else {
-				bot.chat("Command not found: '" + args[0] + "'.");
+				bot.send(
+					"Command not found: '" + args[0] + "'.",
+					message.author.username
+				);
 			}
 		} else {
-			bot.chat(
-				"[ Tranium Bot ] `List of commands: " + commandList.join(" ")
+			bot.send(
+				"[ Tranium Bot ] `List of commands: " + commandList.join(" "),
+				message.author.username
 			);
 		}
 	},

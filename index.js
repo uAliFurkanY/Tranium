@@ -12,7 +12,7 @@ const rl = readline.createInterface(process.stdin, process.stdout);
 async function main() {
 	const config = require("./config.json");
 	if (!config.version) delete config.version;
-	if (!config.password) delete config.version;
+	if (!config.password) delete config.password;
 	if (!config.server || !config.username)
 		throw Error("Invalid configuration");
 

@@ -11,6 +11,9 @@ module.exports = {
 	 * @param {FormData} commands
 	 */
 	execute(bot, message, args, selfCmd) {
-		bot.chat("https://github.com/uAliFurkanY/Tranium");
+		bot.send(
+			"https://github.com/uAliFurkanY/Tranium",
+			message.author.username
+		);
 	},
 };

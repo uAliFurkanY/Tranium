@@ -30,11 +30,20 @@ module.exports = {
 						? 3
 						: parseInt(args[1]);
 				} else {
-					return bot.chat("User not found: " + args[0] + ".");
+					return bot.send(
+						"User not found: " + args[0] + ".",
+						message.author.username
+					);
 				}
-				bot.chat("Successfully set auth level for " + args[0] + ".");
+				bot.send(
+					"Successfully set auth level for " + args[0] + ".",
+					message.author.username
+				);
 			} else throw "ERR_USAGE";
 		} else
-			bot.chat("You don't have the required permissions. (A3 required)");
+			bot.send(
+				"You don't have the required permissions. (A3 required)",
+				message.author.username
+			);
 	},
 };

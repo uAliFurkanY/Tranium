@@ -24,8 +24,10 @@
 		"fd-wrapper": "^0.1.0",
 		"inquirer": "^7.3.3",
 		"mineflayer": "^2.34.0",
+		"mineflayer-navigate": "0.0.10",
 		"nkv.db": "^0.1.1",
 		"prettier": "^2.2.0",
-		"sleepjs": "^4.0.2"
+		"sleepjs": "^4.0.2",
+		"vec3": "^0.1.7"
 	}
 }

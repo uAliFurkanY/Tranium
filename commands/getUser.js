@@ -18,19 +18,31 @@ module.exports = {
 				if (possibleUser) {
 					let usr = userData(possibleUser.uuid);
 					args.shift();
-					bot.chat(JSON.stringify(usr[args.shift()]));
+					bot.send(
+						JSON.stringify(usr[args.shift()]),
+						message.author.username
+					);
 				} else if (
 					args[0].match(
 						/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
 					)
 				) {
 					let usr = userData(args.shift());
-					bot.chat(JSON.stringify(usr[args.shift()]));
+					bot.send(
+						JSON.stringify(usr[args.shift()]),
+						message.author.username
+					);
 				} else {
-					return bot.chat("User not found: " + args[0] + ".");
+					return bot.send(
+						"User not found: " + args[0] + ".",
+						message.author.username
+					);
 				}
 			} else throw "ERR_USAGE";
 		} else
-			bot.chat("You don't have the required permissions. (A3 required)");
+			bot.send(
+				"You don't have the required permissions. (A3 required)",
+				message.author.username
+			);
 	},
 };

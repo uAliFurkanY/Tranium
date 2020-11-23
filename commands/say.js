@@ -12,9 +12,12 @@ module.exports = {
 	 */
 	execute(bot, message, args, selfCmd) {
 		if (message.author.authLevel() === 3) {
-			if (args.length >= 1) bot.chat(args.join(" "));
+			if (args.length >= 1) bot.send(args.join(" "));
 			else throw "ERR_USAGE";
 		} else
-			bot.chat("You don't have the required permissions. (A3 required)");
+			bot.send(
+				"You don't have the required permissions. (A3 required)",
+				message.author.username
+			);
 	},
 };

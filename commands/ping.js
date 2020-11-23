@@ -13,6 +13,9 @@ module.exports = {
 	execute(bot, message, args, selfCmd) {
 		let user = bot.players[args[0]];
 		if (!user) user = message.author.user;
-		bot.chat("Ping of " + user.username + ": " + user.ping + "ms");
+		bot.send(
+			"Ping of " + user.username + ": " + user.ping + "ms",
+			message.author.username
+		);
 	},
 };

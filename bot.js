@@ -17,6 +17,11 @@ function createBot(host, port, version, user, pass) {
 	login.username = user || login.username;
 	login.password = pass || login.password;
 	let bot = mineflayer.createBot(login);
+	bot.send = (msg, user = "") => {
+		data.chat === "msg" && user
+			? bot.chat(`/msg ${user} ${msg}`)
+			: bot.chat(msg);
+	};
 	bot._client.on("session", (ses) => {
 		console.log("SESSION".bgMagenta);
 		login.session = ses;
@@ -29,6 +34,10 @@ function createBot(host, port, version, user, pass) {
 		})
 		.on("error", (err) => {
 			console.log("ERROR".bgRed);
+			console.log(err);
+		})
+		.on("kicked", (err) => {
+			console.log("KICKED".bgRed);
 			console.log(err);
 		})
 		.on("end", () => {

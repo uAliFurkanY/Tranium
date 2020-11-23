@@ -18,12 +18,13 @@ module.exports = {
 			if (potentialUser) {
 				let usr = userData(potentialUser.uuid);
 				usr.blacklisted = !usr.blacklisted;
-				bot.chat(
+				bot.send(
 					"Successfully " +
 						(usr.blacklisted ? "blacklisted" : "un-blacklisted") +
 						" " +
 						args[0] +
-						"."
+						".",
+					message.author.username
 				);
 			} else if (
 				args[0].match(
@@ -32,18 +33,25 @@ module.exports = {
 			) {
 				let usr = userData(args[0]);
 				usr.blacklisted = !usr.blacklisted;
-				bot.chat(
+				bot.send(
 					"Successfully " +
 						(usr.blacklisted ? "blacklisted" : "un-blacklisted") +
 						" " +
 						args[0] +
-						"."
+						".",
+					message.author.username
 				);
 			} else {
-				bot.chat("User not found: " + args[0] + ".");
+				bot.send(
+					"User not found: " + args[0] + ".",
+					message.author.username
+				);
 			}
 		} else if (args[0])
-			bot.chat("You don't have the required permissions. (A2 required)");
+			bot.send(
+				"You don't have the required permissions. (A2 required)",
+				message.author.username
+			);
 		else if (message.author.authLevel() >= 2) throw "ERR_USAGE";
 	},
 };
