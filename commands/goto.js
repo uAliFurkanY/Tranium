@@ -23,6 +23,7 @@ module.exports = {
 		} else if (args.length < 3) {
 			throw "ERR_USAGE";
 		} else {
+			bot.send("Now pathfinding.", message.author.username);
 			bot.navigate.walk(new Vec3(...args), (reason) => {
 				switch (reason) {
 					case "arrived":
@@ -45,7 +46,6 @@ module.exports = {
 						break;
 				}
 			});
-			bot.send("Now pathfinding.", message.author.username);
 		}
 	},
 };

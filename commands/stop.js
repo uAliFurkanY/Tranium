@@ -21,6 +21,7 @@ module.exports = {
 				message.author.username
 			);
 		} else {
+			bot.send("Stopping.");
 			bot.navigate.stop();
 		}
 	},
