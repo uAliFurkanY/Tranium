@@ -22,7 +22,9 @@ module.exports = {
 			);
 		} else {
 			bot.send("Stopping.");
-			bot.navigate.stop();
+			try {
+				bot.navigate.stop();
+			} catch {}
 		}
 	},
 };
