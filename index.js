@@ -2,7 +2,6 @@ const errorHandler = require("./handlers/errorHandler");
 const chatHandler = require("./handlers/chatHandler");
 const tpaHandler = require("./handlers/tpaHandler");
 const { Message, User } = require("./lib/classes");
-const { sleep } = require("sleepjs");
 global.Message = Message;
 global.User = User;
 global.sinceLastKill = Date.now();
@@ -42,8 +41,7 @@ async function main() {
 			bot.on("chat", (u, m, t, cm) => chatHandler(bot, u, m, t, cm));
 		}).on("end", async () => {
 			spawned = false;
-			await sleep(5000);
-			createBot();
+			setTimeout(createBot(), 5000); //this is better
 		});
 	})();
 

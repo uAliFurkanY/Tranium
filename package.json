@@ -23,11 +23,11 @@
 		"colors": "^1.4.0",
 		"fd-wrapper": "^0.1.0",
 		"inquirer": "^7.3.3",
+		"mcdata": "^1.0.8",
 		"mineflayer": "^2.34.0",
-		"mineflayer-navigate": "0.0.10",
+		"mineflayer-pathfinder": "^1.0.12",
 		"nkv.db": "^0.1.1",
 		"prettier": "^2.2.0",
-		"sleepjs": "^4.0.2",
 		"vec3": "^0.1.7"
 	}
 }
