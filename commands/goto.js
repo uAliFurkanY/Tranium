@@ -5,7 +5,7 @@ const { Message } = require("../lib/classes");
 
 module.exports = {
 	name: "goto",
-	desc: "Go to somewhere idk im lazy.",
+	desc: "Make the bot pathfind to a goal.",
 	usage: "goto <X> <Y> <Z>",
 	/**
 	 * @param {mineflayer.Bot} bot
@@ -23,7 +23,29 @@ module.exports = {
 		} else if (args.length < 3) {
 			throw "ERR_USAGE";
 		} else {
-			bot.navigate.to(new Vec3(...args));
+			bot.navigate.walk(new Vec3(...args), (reason) => {
+				switch (reason) {
+					case "arrived":
+						bot.send(
+							"Arrived at the destionation.",
+							message.author.username
+						);
+						break;
+					case "arrived":
+						bot.send(
+							"Path obstructed. Stopping.",
+							message.author.username
+						);
+						break;
+					case "arrived":
+						bot.send(
+							"Path interrupted. Stopping.",
+							message.author.username
+						);
+						break;
+				}
+			});
+			bot.send("Now pathfinding.", message.author.username);
 		}
 	},
 };
